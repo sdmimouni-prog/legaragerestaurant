@@ -1,0 +1,1814 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Le Garage Restaurant, table signature du Musée de l'Automobile du Maroc à Casablanca: cuisine ouverte, carte de saison, chefs d'exception et réservations.">
+  <title>Le Garage Restaurant | Casablanca</title>
+  <link rel="icon" href="assets/logo-le-garage-square.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --noir: #080806;
+      --ink: #11100d;
+      --charcoal: #17130f;
+      --copper: #b8733f;
+      --copper-bright: #d89255;
+      --bronze: #7a5a32;
+      --olive: #73704d;
+      --ivory: #f5f1e8;
+      --ivory-muted: #d8d0c1;
+      --paper: #eee3d1;
+      --line: rgba(216, 146, 85, .32);
+      --shadow: 0 28px 70px rgba(0, 0, 0, .44);
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "Montserrat", Arial, sans-serif;
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--noir);
+      color: var(--ivory);
+      font-family: var(--sans);
+      letter-spacing: 0;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px) 0 0 / 112px 112px,
+        linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px) 0 0 / 112px 112px;
+      opacity: .45;
+      z-index: -1;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(216, 146, 85, .22);
+      background: rgba(8, 8, 6, .82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 158px;
+      height: 48px;
+      border: 1px solid rgba(216, 146, 85, .34);
+      border-radius: 6px;
+      object-fit: cover;
+      object-position: center;
+      background: #140d08;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--copper-bright);
+      font-family: var(--serif);
+      font-weight: 700;
+      background: #0d0b08;
+      flex: 0 0 auto;
+    }
+
+    .brand-name {
+      display: grid;
+      gap: 0;
+      line-height: 1.1;
+    }
+
+    .brand-name strong {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .brand-name span {
+      color: var(--copper-bright);
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: rgba(245, 241, 232, .78);
+      font-size: .88rem;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: var(--copper-bright);
+      transition: transform .22s ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 12px 18px;
+      font-size: .86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #170f08;
+      background: var(--copper-bright);
+      border-color: rgba(255, 255, 255, .08);
+      box-shadow: 0 18px 34px rgba(184, 115, 63, .24);
+    }
+
+    .btn-secondary {
+      color: var(--ivory);
+      background: rgba(245, 241, 232, .06);
+      border-color: var(--line);
+    }
+
+    .btn-ghost {
+      color: var(--ivory);
+      background: transparent;
+      border-color: rgba(245, 241, 232, .24);
+    }
+
+    .menu-toggle {
+      width: 46px;
+      height: 46px;
+      display: none;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ivory);
+      background: rgba(245, 241, 232, .05);
+    }
+
+    .menu-toggle span,
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      width: 18px;
+      height: 2px;
+      display: block;
+      background: currentColor;
+      transition: transform .22s ease, opacity .22s ease;
+      content: "";
+    }
+
+    .menu-toggle span::before {
+      transform: translateY(-7px);
+    }
+
+    .menu-toggle span::after {
+      transform: translateY(5px);
+    }
+
+    .menu-toggle[aria-expanded="true"] span {
+      background: transparent;
+    }
+
+    .menu-toggle[aria-expanded="true"] span::before {
+      transform: rotate(45deg);
+      background: var(--ivory);
+    }
+
+    .menu-toggle[aria-expanded="true"] span::after {
+      transform: translateY(-2px) rotate(-45deg);
+      background: var(--ivory);
+    }
+
+    .mobile-panel {
+      display: none;
+      border-top: 1px solid rgba(216, 146, 85, .22);
+      background: #0b0907;
+    }
+
+    .mobile-panel.is-open {
+      display: block;
+    }
+
+    .mobile-panel-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 18px 0 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .mobile-panel a {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(245, 241, 232, .08);
+      color: rgba(245, 241, 232, .86);
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 70svh;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(8, 8, 6, .96) 0%, rgba(8, 8, 6, .78) 44%, rgba(8, 8, 6, .34) 100%),
+        linear-gradient(0deg, #080806 0%, rgba(8, 8, 6, .24) 42%),
+        url("assets/bar-cocktail.png") center / cover no-repeat;
+    }
+
+    .hero-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 82px 0 54px;
+      display: grid;
+      grid-template-columns: minmax(0, .96fr) minmax(330px, .62fr);
+      gap: 42px;
+      align-items: end;
+    }
+
+    .hero-copy {
+      max-width: 690px;
+    }
+
+    .logo-plate {
+      width: min(410px, 100%);
+      margin-bottom: 26px;
+      border: 1px solid rgba(255, 217, 166, .24);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: var(--copper-bright);
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::after {
+      content: "";
+      width: 48px;
+      height: 1px;
+      background: currentColor;
+      opacity: .7;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: var(--serif);
+      line-height: 1.04;
+      font-weight: 600;
+    }
+
+    h1 {
+      max-width: 760px;
+      color: var(--ivory);
+      font-size: 5rem;
+    }
+
+    h1 em,
+    h2 em {
+      color: var(--copper-bright);
+      font-style: italic;
+    }
+
+    .hero-copy p {
+      max-width: 620px;
+      margin: 24px 0 0;
+      color: rgba(245, 241, 232, .78);
+      font-size: 1.04rem;
+    }
+
+    .hero-actions,
+    .section-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-aside {
+      align-self: stretch;
+      display: grid;
+      align-content: end;
+      gap: 14px;
+    }
+
+    .service-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: rgba(11, 9, 7, .78);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .service-panel h2 {
+      margin-bottom: 14px;
+      font-size: 1.65rem;
+    }
+
+    .service-panel p {
+      margin: 0;
+      color: rgba(245, 241, 232, .72);
+      font-size: .92rem;
+    }
+
+    .service-list {
+      margin: 20px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+      list-style: none;
+    }
+
+    .service-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(245, 241, 232, .12);
+      color: rgba(245, 241, 232, .76);
+      font-size: .9rem;
+    }
+
+    .service-list li:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .service-list strong {
+      color: var(--ivory);
+      white-space: nowrap;
+    }
+
+    .hero-mini-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .hero-mini-gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .quickbar {
+      position: relative;
+      z-index: 2;
+      background: #100c09;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .quickbar-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .quick-item {
+      min-height: 96px;
+      padding: 24px 26px;
+      border-left: 1px solid rgba(216, 146, 85, .2);
+    }
+
+    .quick-item:last-child {
+      border-right: 1px solid rgba(216, 146, 85, .2);
+    }
+
+    .quick-item span {
+      display: block;
+      color: var(--copper-bright);
+      font-size: .76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .quick-item strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ivory);
+      font-family: var(--serif);
+      font-size: 1.28rem;
+      line-height: 1.2;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section.alt {
+      background: #0d0b08;
+      border-block: 1px solid rgba(216, 146, 85, .18);
+    }
+
+    .section.light {
+      background: var(--paper);
+      color: #21170f;
+    }
+
+    .section-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .section-heading.center .eyebrow {
+      justify-content: center;
+    }
+
+    .section-heading h2 {
+      font-size: 3.2rem;
+    }
+
+    .section-heading p {
+      margin: 18px 0 0;
+      color: rgba(245, 241, 232, .68);
+      font-size: 1rem;
+    }
+
+    .light .section-heading p,
+    .light .body-copy,
+    .light .menu-item p {
+      color: rgba(33, 23, 15, .68);
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .72fr) minmax(360px, .48fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .image-frame {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #14100c;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      object-fit: cover;
+    }
+
+    .image-frame.tall img {
+      min-height: 620px;
+    }
+
+    .image-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border: 1px solid rgba(245, 241, 232, .18);
+      border-radius: 6px;
+      background: rgba(8, 8, 6, .72);
+      backdrop-filter: blur(14px);
+      color: rgba(245, 241, 232, .84);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .body-copy {
+      color: rgba(245, 241, 232, .72);
+      font-size: 1rem;
+    }
+
+    .stats-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat-card,
+    .pillar-card,
+    .moment-card,
+    .chef-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(245, 241, 232, .045);
+    }
+
+    .stat-card {
+      padding: 20px;
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--copper-bright);
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .stat-card span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(245, 241, 232, .72);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .pillar-card {
+      min-height: 230px;
+      padding: 26px;
+      display: grid;
+      align-content: space-between;
+      background: linear-gradient(180deg, rgba(184, 115, 63, .11), rgba(245, 241, 232, .035));
+    }
+
+    .pillar-card span {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--copper-bright);
+      font-family: var(--serif);
+      font-size: 1.3rem;
+    }
+
+    .pillar-card h3 {
+      margin-top: 28px;
+      font-size: 1.35rem;
+    }
+
+    .pillar-card p {
+      margin: 10px 0 0;
+      color: rgba(245, 241, 232, .68);
+      font-size: .9rem;
+    }
+
+    .menu-layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 38px;
+      align-items: start;
+    }
+
+    .menu-intro {
+      position: sticky;
+      top: 104px;
+    }
+
+    .menu-intro h2 {
+      font-size: 2.9rem;
+    }
+
+    .menu-intro p {
+      margin: 18px 0 0;
+      color: rgba(33, 23, 15, .68);
+    }
+
+    .tabs {
+      margin-top: 28px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tab-button {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 16px;
+      border: 1px solid rgba(122, 90, 50, .28);
+      border-radius: 6px;
+      color: #2b1b10;
+      background: rgba(255, 255, 255, .34);
+      cursor: pointer;
+      text-align: left;
+      font-weight: 800;
+    }
+
+    .tab-button[aria-selected="true"] {
+      color: #fffaf0;
+      background: #21170f;
+      border-color: #21170f;
+    }
+
+    .menu-board {
+      border: 1px solid rgba(122, 90, 50, .28);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .45);
+      overflow: hidden;
+    }
+
+    .menu-section {
+      display: none;
+    }
+
+    .menu-section.is-active {
+      display: block;
+    }
+
+    .menu-category {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 26px;
+      background: #21170f;
+      color: var(--ivory);
+    }
+
+    .menu-category h3 {
+      font-size: 1.65rem;
+    }
+
+    .menu-category span {
+      color: var(--copper-bright);
+      font-weight: 800;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      padding: 24px 26px;
+      border-bottom: 1px solid rgba(122, 90, 50, .18);
+    }
+
+    .menu-item:last-child {
+      border-bottom: 0;
+    }
+
+    .menu-item strong {
+      display: block;
+      color: #21170f;
+      font-family: var(--serif);
+      font-size: 1.28rem;
+      line-height: 1.25;
+    }
+
+    .menu-item p {
+      margin: 7px 0 0;
+      font-size: .92rem;
+    }
+
+    .price {
+      color: #21170f;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .kitchen-band {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(300px, .42fr);
+      min-height: 560px;
+      border-block: 1px solid var(--line);
+      background: #0d0b08;
+    }
+
+    .kitchen-band img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .kitchen-copy {
+      padding: 64px 9vw 64px 54px;
+      align-self: center;
+    }
+
+    .kitchen-copy h2 {
+      font-size: 3rem;
+    }
+
+    .kitchen-copy p {
+      color: rgba(245, 241, 232, .72);
+    }
+
+    .gallery-strip {
+      margin-top: 38px;
+      display: grid;
+      grid-template-columns: 1fr 1.18fr 1fr;
+      gap: 16px;
+    }
+
+    .gallery-strip img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .gallery-strip img:nth-child(2) {
+      height: 430px;
+      margin-top: -34px;
+    }
+
+    .chef-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .chef-card {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      overflow: hidden;
+      background: rgba(245, 241, 232, .052);
+    }
+
+    .chef-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      object-fit: cover;
+    }
+
+    .chef-content {
+      padding: 30px;
+    }
+
+    .chef-content span {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--copper-bright);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+
+    .chef-content h3 {
+      font-size: 1.9rem;
+    }
+
+    .chef-content p {
+      color: rgba(245, 241, 232, .7);
+      font-size: .92rem;
+    }
+
+    .moments-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .moment-card {
+      overflow: hidden;
+      background: rgba(245, 241, 232, .055);
+    }
+
+    .moment-card img {
+      width: 100%;
+      height: 310px;
+      object-fit: cover;
+    }
+
+    .moment-content {
+      padding: 24px;
+    }
+
+    .moment-content span {
+      color: var(--copper-bright);
+      font-size: .76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .moment-content h3 {
+      margin-top: 10px;
+      font-size: 1.55rem;
+    }
+
+    .moment-content p {
+      margin: 12px 0 0;
+      color: rgba(245, 241, 232, .68);
+      font-size: .9rem;
+    }
+
+    .reservation {
+      background:
+        linear-gradient(90deg, rgba(8, 8, 6, .94), rgba(8, 8, 6, .72)),
+        url("assets/cuisine-ouverte.jpg") center / cover no-repeat;
+      border-top: 1px solid var(--line);
+    }
+
+    .reservation-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(360px, .58fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .reservation-form,
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(8, 8, 6, .78);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .reservation-form {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: rgba(245, 241, 232, .78);
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid rgba(245, 241, 232, .14);
+      border-radius: 6px;
+      padding: 12px 14px;
+      color: var(--ivory);
+      background: rgba(245, 241, 232, .06);
+      outline: none;
+    }
+
+    textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--copper-bright);
+      box-shadow: 0 0 0 3px rgba(216, 146, 85, .14);
+    }
+
+    .form-note {
+      grid-column: 1 / -1;
+      margin: 0;
+      color: rgba(245, 241, 232, .62);
+      font-size: .82rem;
+    }
+
+    .form-submit {
+      grid-column: 1 / -1;
+      width: 100%;
+    }
+
+    .contact-panel {
+      padding: 30px;
+    }
+
+    .contact-panel h2 {
+      font-size: 2.1rem;
+    }
+
+    .contact-list {
+      margin: 24px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .contact-list li {
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(245, 241, 232, .1);
+    }
+
+    .contact-list span {
+      display: block;
+      color: var(--copper-bright);
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .contact-list strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--ivory);
+      line-height: 1.35;
+    }
+
+    .toast {
+      display: none;
+      grid-column: 1 / -1;
+      padding: 12px 14px;
+      border: 1px solid rgba(115, 112, 77, .55);
+      border-radius: 6px;
+      color: var(--ivory);
+      background: rgba(115, 112, 77, .25);
+      font-size: .9rem;
+    }
+
+    .toast.is-visible {
+      display: block;
+    }
+
+    .site-footer {
+      padding: 44px 0;
+      border-top: 1px solid var(--line);
+      background: #080806;
+    }
+
+    .footer-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      color: rgba(245, 241, 232, .6);
+      font-size: .86rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--ivory);
+    }
+
+    .footer-brand img {
+      width: 130px;
+      border: 1px solid rgba(216, 146, 85, .22);
+      border-radius: 6px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1040px) {
+      .nav-links,
+      .nav-actions .btn-secondary {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: grid;
+      }
+
+      .hero-inner,
+      .concept-grid,
+      .kitchen-band,
+      .reservation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-aside {
+        max-width: 620px;
+      }
+
+      h1 {
+        font-size: 4rem;
+      }
+
+      .pillars,
+      .quickbar-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-intro {
+        position: static;
+      }
+
+      .tabs {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .chef-card {
+        grid-template-columns: 1fr;
+      }
+
+      .chef-card img {
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav,
+      .section-inner,
+      .hero-inner,
+      .quickbar-inner,
+      .footer-inner,
+      .mobile-panel-inner {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .brand-name strong {
+        font-size: 1.12rem;
+      }
+
+      .brand-name span {
+        font-size: .66rem;
+      }
+
+      .brand-logo {
+        width: 142px;
+        height: 44px;
+      }
+
+      .nav-actions .btn-primary {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        padding: 54px 0 34px;
+        gap: 24px;
+      }
+
+      .logo-plate {
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .hero-copy p {
+        font-size: .96rem;
+      }
+
+      .hero-actions,
+      .section-actions {
+        display: grid;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-mini-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-mini-gallery img {
+        aspect-ratio: 16 / 10;
+      }
+
+      .service-list li {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .service-list strong {
+        white-space: normal;
+      }
+
+      .quickbar-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-item,
+      .quick-item:last-child {
+        min-height: auto;
+        padding: 18px 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(216, 146, 85, .2);
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .section-heading h2,
+      .menu-intro h2,
+      .kitchen-copy h2 {
+        font-size: 2.35rem;
+      }
+
+      .concept-grid {
+        gap: 28px;
+      }
+
+      .image-frame img,
+      .image-frame.tall img {
+        min-height: 380px;
+      }
+
+      .stats-grid,
+      .pillars,
+      .chef-grid,
+      .moments-grid,
+      .reservation-form {
+        grid-template-columns: 1fr;
+      }
+
+      .tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 22px 20px;
+      }
+
+      .menu-category {
+        padding: 20px;
+      }
+
+      .kitchen-copy {
+        padding: 42px 20px 54px;
+      }
+
+      .gallery-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-strip img,
+      .gallery-strip img:nth-child(2) {
+        height: 320px;
+        margin-top: 0;
+      }
+
+      .reservation-form {
+        padding: 20px;
+      }
+
+      .field.full,
+      .form-note,
+      .toast,
+      .form-submit {
+        grid-column: auto;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand-logo {
+        width: 126px;
+        height: 40px;
+      }
+
+      .brand-name span {
+        display: none;
+      }
+
+      h1 {
+        font-size: 2.45rem;
+      }
+
+      .section-heading h2,
+      .menu-intro h2,
+      .kitchen-copy h2 {
+        font-size: 2rem;
+      }
+
+      .service-panel,
+      .contact-panel {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="#top" aria-label="Le Garage Restaurant">
+        <img class="brand-logo" src="assets/logo-le-garage-lockup.png" alt="Le Garage Restaurant">
+      </a>
+
+      <div class="nav-links" aria-label="Sections">
+        <a href="#top">Accueil</a>
+        <a href="#concept">Concept</a>
+        <a href="#carte">Carte</a>
+        <a href="#cuisine">Cuisine ouverte</a>
+        <a href="#chefs">Chefs</a>
+        <a href="#temps-forts">Temps forts</a>
+      </div>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="tel:+212668608754">Appeler</a>
+        <a class="btn btn-primary" href="#reservation">Réserver</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-panel" aria-label="Ouvrir le menu">
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="mobile-panel" id="mobile-panel">
+      <div class="mobile-panel-inner">
+        <a href="#top">Accueil</a>
+        <a href="#concept">Concept</a>
+        <a href="#carte">Carte</a>
+        <a href="#cuisine">Cuisine ouverte</a>
+        <a href="#chefs">Chefs</a>
+        <a href="#temps-forts">Temps forts</a>
+        <a href="#reservation">Réserver une table</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="logo-plate">
+            <img src="assets/logo-le-garage-lockup.png" alt="Logo Le Garage Restaurant">
+          </div>
+          <span class="eyebrow">Casablanca · Bouskoura</span>
+          <h1 id="hero-title">Le Garage Restaurant</h1>
+          <p>L'élégance gastronomique inspirée par l'héritage automobile. Une table de saison, une cuisine ouverte et une atmosphère de club privé au cœur du Musée de l'Automobile du Maroc.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#reservation">Réserver une table</a>
+            <a class="btn btn-secondary" href="#carte">Voir la carte</a>
+            <a class="btn btn-ghost" href="mailto:contact@legaragerestaurant.ma">Privatiser</a>
+          </div>
+        </div>
+
+        <aside class="hero-aside" aria-label="Informations rapides">
+          <div class="service-panel">
+            <span class="eyebrow">Aujourd'hui</span>
+            <h2>Deux services, une même précision.</h2>
+            <p>Déjeuner, dîner, brunch privé ou rendez-vous membres: l'équipe ajuste le format au moment.</p>
+            <ul class="service-list">
+              <li><span>Déjeuner</span><strong>12h00 - 16h00</strong></li>
+              <li><span>Dîner</span><strong>19h00 - 23h45</strong></li>
+              <li><span>Réservation</span><strong>+212 6 68 60 87 54</strong></li>
+            </ul>
+          </div>
+          <div class="hero-mini-gallery" aria-hidden="true">
+            <img src="assets/table-ramadan.png" alt="">
+            <img src="assets/cuisine-chef-1.jpg" alt="">
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="quickbar" aria-label="Accès rapide">
+      <div class="quickbar-inner">
+        <a class="quick-item" href="#reservation">
+          <span>Réserver</span>
+          <strong>Demande en ligne</strong>
+        </a>
+        <a class="quick-item" href="#carte">
+          <span>Carte</span>
+          <strong>Entrées · Plats · Desserts</strong>
+        </a>
+        <a class="quick-item" href="#cuisine">
+          <span>Atelier</span>
+          <strong>Cuisine ouverte</strong>
+        </a>
+        <a class="quick-item" href="#infos">
+          <span>Adresse</span>
+          <strong>Route de Bouskoura</strong>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="concept">
+      <div class="section-inner concept-grid">
+        <div>
+          <span class="eyebrow">Concept</span>
+          <div class="section-heading">
+            <h2>Une table, un atelier, un lieu de rencontres.</h2>
+            <p>Le Garage est l'extension naturelle du Musée: design industriel, culture automobile, hospitalité marocaine et cuisine de saison se rejoignent dans une expérience pensée pour les visiteurs, les passionnés et les événements.</p>
+          </div>
+          <p class="body-copy">Le lieu reprend les codes du brand book: noir profond, cuivre, bronze, ivoire chaud, olive vintage, cuir, métal brossé et lumière douce. Chaque détail travaille la même idée: transformer la visite en moment gastronomique mémorable.</p>
+          <div class="stats-grid" aria-label="Indicateurs">
+            <div class="stat-card"><strong>2</strong><span>services par jour</span></div>
+            <div class="stat-card"><strong>Open</strong><span>cuisine visible</span></div>
+            <div class="stat-card"><strong>Privé</strong><span>formats sur mesure</span></div>
+          </div>
+        </div>
+        <figure class="image-frame tall">
+          <img src="assets/garage-restaurant.jpg" alt="Terrasse du restaurant Le Garage au Musée de l'Automobile">
+          <figcaption class="image-caption">Restaurant du Musée de l'Automobile du Maroc · Casablanca</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section alt" aria-labelledby="valeurs-title">
+      <div class="section-inner">
+        <div class="section-heading center">
+          <span class="eyebrow">ADN</span>
+          <h2 id="valeurs-title">Les codes du Garage.</h2>
+        </div>
+        <div class="pillars">
+          <article class="pillar-card">
+            <span>01</span>
+            <div>
+              <h3>Précision</h3>
+              <p>Une cuisine maîtrisée jusque dans le moindre détail.</p>
+            </div>
+          </article>
+          <article class="pillar-card">
+            <span>02</span>
+            <div>
+              <h3>Héritage</h3>
+              <p>Un lieu inspiré par l'histoire automobile et les belles mécaniques.</p>
+            </div>
+          </article>
+          <article class="pillar-card">
+            <span>03</span>
+            <div>
+              <h3>Élégance</h3>
+              <p>Une atmosphère chaleureuse, sophistiquée et intemporelle.</p>
+            </div>
+          </article>
+          <article class="pillar-card">
+            <span>04</span>
+            <div>
+              <h3>Passion</h3>
+              <p>Une expérience pensée pour les amateurs de gastronomie et d'émotions.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="carte">
+      <div class="section-inner menu-layout">
+        <aside class="menu-intro">
+          <span class="eyebrow">La carte</span>
+          <h2>Menu signature.</h2>
+          <p>Produits choisis, assiettes lisibles, goûts francs et dressages soignés. Une carte courte, réglée comme une mécanique de précision.</p>
+          <div class="tabs" role="tablist" aria-label="Catégories de la carte">
+            <button class="tab-button" type="button" role="tab" aria-selected="true" aria-controls="entrees" id="tab-entrees" data-tab="entrees">Entrées</button>
+            <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="plats" id="tab-plats" data-tab="plats">Plats</button>
+            <button class="tab-button" type="button" role="tab" aria-selected="false" aria-controls="desserts" id="tab-desserts" data-tab="desserts">Desserts</button>
+          </div>
+        </aside>
+
+        <div class="menu-board">
+          <section class="menu-section is-active" id="entrees" role="tabpanel" aria-labelledby="tab-entrees">
+            <div class="menu-category">
+              <h3>Entrées</h3>
+              <span>90 - 135 DH</span>
+            </div>
+            <article class="menu-item">
+              <div>
+                <strong>Tartare mangue, avocat & crevettes</strong>
+                <p>Vinaigrette aigre-douce, fraîcheur fruitée et finale iodée.</p>
+              </div>
+              <span class="price">105 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Salade César au poulet mariné</strong>
+                <p>Parmesan, chips d'ail et assaisonnement maison.</p>
+              </div>
+              <span class="price">90 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Grand carpaccio de bœuf</strong>
+                <p>Parmesan, câpres frits et noisettes grillées.</p>
+              </div>
+              <span class="price">135 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Carpaccio de loup aux agrumes</strong>
+                <p>Gingembre, tomates séchées et marinade vive.</p>
+              </div>
+              <span class="price">125 DH</span>
+            </article>
+          </section>
+
+          <section class="menu-section" id="plats" role="tabpanel" aria-labelledby="tab-plats">
+            <div class="menu-category">
+              <h3>Plats</h3>
+              <span>165 - 235 DH</span>
+            </div>
+            <article class="menu-item">
+              <div>
+                <strong>Filet de dorade à la plancha</strong>
+                <p>Écrasée de pomme de terre aux algues et jus de bisque.</p>
+              </div>
+              <span class="price">195 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Entrecôte de bœuf grillée 300 g</strong>
+                <p>Gratin de macaronis au cheddar.</p>
+              </div>
+              <span class="price">215 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Épaule d'agneau confite</strong>
+                <p>Tian de légumes, pommes croustillantes et crème d'ail.</p>
+              </div>
+              <span class="price">235 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Ribs de bœuf façon Tangia</strong>
+                <p>Purée de carottes au cumin et jus généreux.</p>
+              </div>
+              <span class="price">165 DH</span>
+            </article>
+          </section>
+
+          <section class="menu-section" id="desserts" role="tabpanel" aria-labelledby="tab-desserts">
+            <div class="menu-category">
+              <h3>Desserts</h3>
+              <span>70 - 75 DH</span>
+            </div>
+            <article class="menu-item">
+              <div>
+                <strong>Pavlova fruits rouges</strong>
+                <p>Crème légère au chocolat blanc.</p>
+              </div>
+              <span class="price">75 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Cheesecake Dubaï style</strong>
+                <p>Texture fondante et jeu de croustillants.</p>
+              </div>
+              <span class="price">75 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Millefeuille noisette</strong>
+                <p>Feuilletage, crème et notes torréfiées.</p>
+              </div>
+              <span class="price">75 DH</span>
+            </article>
+            <article class="menu-item">
+              <div>
+                <strong>Salade de fruits frais</strong>
+                <p>Simple, nette, de saison.</p>
+              </div>
+              <span class="price">70 DH</span>
+            </article>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="kitchen-band" id="cuisine" aria-labelledby="cuisine-title">
+      <img src="assets/cuisine-ouverte.jpg" alt="Cuisine ouverte du Garage avec la brigade en service">
+      <div class="kitchen-copy">
+        <span class="eyebrow">L'atelier culinaire</span>
+        <h2 id="cuisine-title">La cuisine devient spectacle, sans artifice.</h2>
+        <p>La brigade travaille à vue: flammes, dressages, gestes synchronisés et circulation fluide. L'univers automobile inspire l'exigence du lieu: rigueur, précision et coordination.</p>
+        <div class="section-actions">
+          <a class="btn btn-primary" href="#reservation">Réserver près de l'atelier</a>
+          <a class="btn btn-secondary" href="#chefs">Voir les chefs</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="gallery-title">
+      <div class="section-inner">
+        <div class="section-heading center">
+          <span class="eyebrow">En images</span>
+          <h2 id="gallery-title">Matières, gestes, lumière.</h2>
+          <p>Une scénographie sensorielle: cuir, cuivre, métal, bois foncé, verre fumé et énergie du service.</p>
+        </div>
+        <div class="gallery-strip">
+          <img src="assets/cuisine-bar.png" alt="Comptoir lumineux du restaurant">
+          <img src="assets/cuisine-chef-2.jpg" alt="Chef en cuisine ouverte">
+          <img src="assets/table-ramadan.png" alt="Table dressée avec soupe et mets marocains">
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="chefs">
+      <div class="section-inner">
+        <div class="section-heading">
+          <span class="eyebrow">Les chefs</span>
+          <h2>Une signature portée par l'exigence et la transmission.</h2>
+          <p>La vision culinaire du Garage repose sur la précision, la constance et la formation des talents.</p>
+        </div>
+
+        <div class="chef-grid">
+          <article class="chef-card">
+            <img src="assets/stephane-gaborieau.jpg" alt="Stéphane Gaborieau">
+            <div class="chef-content">
+              <span>Maître de mise en œuvre</span>
+              <h3>Stéphane Gaborieau</h3>
+              <p>Double étoilé Michelin et Meilleur Ouvrier de France, il accompagne le projet pour structurer l'identité culinaire et transmettre une culture d'excellence durable.</p>
+            </div>
+          </article>
+
+          <article class="chef-card">
+            <img src="assets/bernard-bremond.jpg" alt="Bernard Brémond">
+            <div class="chef-content">
+              <span>Chef exécutif</span>
+              <h3>Bernard Brémond</h3>
+              <p>Il transforme l'exigence en réalité opérationnelle: encadrer les équipes, garantir la constance et veiller à la précision de chaque service.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="temps-forts">
+      <div class="section-inner">
+        <div class="section-heading">
+          <span class="eyebrow">Temps forts</span>
+          <h2>Les moments qui font vivre la table.</h2>
+          <p>Actualités culinaires, rendez-vous saisonniers, cocktails, cuisine en scène et formats privés en lien avec le Musée.</p>
+        </div>
+
+        <div class="moments-grid">
+          <article class="moment-card">
+            <img src="assets/table-ramadan.png" alt="Ftour signature au restaurant Le Garage">
+            <div class="moment-content">
+              <span>Ramadan</span>
+              <h3>Ftour signature</h3>
+              <p>Dattes, soupes servies à table, classiques marocains, plats signature et accès au musée.</p>
+            </div>
+          </article>
+          <article class="moment-card">
+            <img src="assets/bar-cocktail.png" alt="Bar inspiré par l'univers automobile">
+            <div class="moment-content">
+              <span>Cocktail</span>
+              <h3>Bar mécanique</h3>
+              <p>Métal patiné, précision du geste et assemblages audacieux pour des soirées de marque.</p>
+            </div>
+          </article>
+          <article class="moment-card">
+            <img src="assets/garage-restaurant.jpg" alt="Extérieur du Musée et du restaurant">
+            <div class="moment-content">
+              <span>Privé</span>
+              <h3>Événements sur mesure</h3>
+              <p>Cocktail, dîner membres, déjeuner d'affaires ou privatisation complète avec parcours musée.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reservation" id="reservation">
+      <div class="section-inner reservation-grid">
+        <div>
+          <span class="eyebrow">Réservation</span>
+          <div class="section-heading">
+            <h2>Préparer votre moment au Garage.</h2>
+            <p>Déjeuner, dîner, brunch, rendez-vous membres ou repas de groupe: envoyez une demande et l'équipe confirme le créneau final.</p>
+          </div>
+          <form class="reservation-form" id="reservation-form">
+            <div class="field">
+              <label for="name">Nom complet</label>
+              <input id="name" name="name" autocomplete="name" placeholder="Votre nom" required>
+            </div>
+            <div class="field">
+              <label for="phone">Téléphone</label>
+              <input id="phone" name="phone" autocomplete="tel" placeholder="+212 ..." required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="vous@email.com">
+            </div>
+            <div class="field">
+              <label for="guests">Nombre de personnes</label>
+              <select id="guests" name="guests">
+                <option>2 personnes</option>
+                <option>4 personnes</option>
+                <option>6 personnes</option>
+                <option>8 personnes</option>
+                <option>Groupe / privatisation</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="date">Date souhaitée</label>
+              <input id="date" name="date" type="date">
+            </div>
+            <div class="field">
+              <label for="slot">Créneau</label>
+              <select id="slot" name="slot">
+                <option>Déjeuner · 12h00-16h00</option>
+                <option>Dîner · 19h00-23h45</option>
+                <option>Brunch / événement privé</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Occasion, préférences, demande groupe..."></textarea>
+            </div>
+            <p class="form-note">Ce prototype prépare une demande. Pour une mise en production, le formulaire pourra être branché à un CRM, WhatsApp Business ou un module de réservation.</p>
+            <div class="toast" id="toast" role="status">Demande préparée. L'équipe pourra confirmer le créneau par téléphone ou email.</div>
+            <button class="btn btn-primary form-submit" type="submit">Envoyer la demande</button>
+          </form>
+        </div>
+
+        <aside class="contact-panel" id="infos">
+          <span class="eyebrow">Infos pratiques</span>
+          <h2>Horaires & contact.</h2>
+          <ul class="contact-list">
+            <li><span>Déjeuner</span><strong>12h00 à 16h00</strong></li>
+            <li><span>Dîner</span><strong>19h00 à 23h45</strong></li>
+            <li><span>Téléphone</span><strong><a href="tel:+212668608754">+212 6 68 60 87 54</a></strong></li>
+            <li><span>Email</span><strong><a href="mailto:contact@legaragerestaurant.ma">contact@legaragerestaurant.ma</a></strong></li>
+            <li><span>Adresse</span><strong>Musée de l'Automobile du Maroc, Route de Bouskoura, Casablanca</strong></li>
+          </ul>
+          <div class="section-actions">
+            <a class="btn btn-primary" href="tel:+212668608754">Appeler</a>
+            <a class="btn btn-secondary" href="mailto:contact@legaragerestaurant.ma">Écrire</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/logo-le-garage-lockup.png" alt="Le Garage Restaurant">
+        <span>Restaurant du Musée de l'Automobile du Maroc</span>
+      </div>
+      <div class="footer-links" aria-label="Liens de bas de page">
+        <a href="#carte">Carte</a>
+        <a href="#reservation">Réservation</a>
+        <a href="mailto:contact@legaragerestaurant.ma">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobilePanel = document.querySelector("#mobile-panel");
+    const mobileLinks = mobilePanel.querySelectorAll("a");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Ouvrir le menu" : "Fermer le menu");
+      mobilePanel.classList.toggle("is-open", !isOpen);
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Ouvrir le menu");
+        mobilePanel.classList.remove("is-open");
+      });
+    });
+
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const menuSections = document.querySelectorAll(".menu-section");
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.tab;
+        tabButtons.forEach((item) => item.setAttribute("aria-selected", String(item === button)));
+        menuSections.forEach((section) => {
+          section.classList.toggle("is-active", section.id === target);
+        });
+      });
+    });
+
+    document.querySelector("#reservation-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.querySelector("#toast").classList.add("is-visible");
+    });
+  </script>
+</body>
+</html>
