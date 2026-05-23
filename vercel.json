@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/le-garage-restaurant/",
+      "permanent": false
+    }
+  ]
+}
