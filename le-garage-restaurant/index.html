@@ -301,13 +301,12 @@
       margin: 0 auto;
       padding: 82px 0 54px;
       display: grid;
-      grid-template-columns: minmax(0, .96fr) minmax(330px, .62fr);
-      gap: 42px;
-      align-items: start;
+      grid-template-columns: minmax(0, 760px);
+      align-items: center;
     }
 
     .hero-copy {
-      max-width: 690px;
+      max-width: 760px;
     }
 
     .eyebrow {
@@ -363,76 +362,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-    }
-
-    .hero-aside {
-      align-self: stretch;
-      display: grid;
-      align-content: start;
-      gap: 14px;
-    }
-
-    .service-panel {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 22px;
-      background: rgba(11, 9, 7, .78);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-
-    .service-panel h2 {
-      margin-bottom: 14px;
-      font-size: 1.65rem;
-    }
-
-    .service-panel p {
-      margin: 0;
-      color: rgba(245, 241, 232, .72);
-      font-size: .92rem;
-    }
-
-    .service-list {
-      margin: 20px 0 0;
-      padding: 0;
-      display: grid;
-      gap: 14px;
-      list-style: none;
-    }
-
-    .service-list li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(245, 241, 232, .12);
-      color: rgba(245, 241, 232, .76);
-      font-size: .9rem;
-    }
-
-    .service-list li:last-child {
-      padding-bottom: 0;
-      border-bottom: 0;
-    }
-
-    .service-list strong {
-      color: var(--ivory);
-      white-space: nowrap;
-    }
-
-    .hero-mini-gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .hero-mini-gallery img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border: 1px solid var(--line);
-      border-radius: 8px;
     }
 
     .quickbar {
@@ -1070,10 +999,6 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-aside {
-        max-width: 620px;
-      }
-
       h1 {
         font-size: 4rem;
       }
@@ -1159,24 +1084,6 @@
 
       .btn {
         width: 100%;
-      }
-
-      .hero-mini-gallery {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-mini-gallery img {
-        aspect-ratio: 16 / 10;
-      }
-
-      .service-list li {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .service-list strong {
-        white-space: normal;
       }
 
       .quickbar-inner {
@@ -1289,7 +1196,6 @@
         font-size: 2rem;
       }
 
-      .service-panel,
       .contact-panel {
         padding: 20px;
       }
@@ -1348,22 +1254,6 @@
           </div>
         </div>
 
-        <aside class="hero-aside" aria-label="Informations rapides">
-          <div class="service-panel">
-            <span class="eyebrow">Aujourd'hui</span>
-            <h2>Deux services, une même précision.</h2>
-            <p>Déjeuner, dîner, brunch privé ou rendez-vous membres: l'équipe ajuste le format au moment.</p>
-            <ul class="service-list">
-              <li><span>Déjeuner</span><strong>12h00 - 16h00</strong></li>
-              <li><span>Dîner</span><strong>19h00 - 23h45</strong></li>
-              <li><span>Réservation</span><strong>+212 6 68 60 87 54</strong></li>
-            </ul>
-          </div>
-          <div class="hero-mini-gallery" aria-hidden="true">
-            <img src="assets/table-ramadan.png" alt="">
-            <img src="assets/cuisine-chef-1.jpg" alt="">
-          </div>
-        </aside>
       </div>
     </section>
 
@@ -1713,8 +1603,8 @@
               <label for="message">Message</label>
               <textarea id="message" name="message" placeholder="Occasion, préférences, demande groupe..."></textarea>
             </div>
-            <p class="form-note">Ce prototype prépare une demande. Pour une mise en production, le formulaire pourra être branché à un CRM, WhatsApp Business ou un module de réservation.</p>
-            <div class="toast" id="toast" role="status">Demande préparée. L'équipe pourra confirmer le créneau par téléphone ou email.</div>
+            <p class="form-note">La demande est préparée par email et adressée à l'équipe du restaurant pour confirmation du créneau.</p>
+            <div class="toast" id="toast" role="status">Votre application email va s'ouvrir avec la demande pré-remplie.</div>
             <button class="btn btn-primary form-submit" type="submit">Envoyer la demande</button>
           </form>
         </div>
@@ -1785,9 +1675,34 @@
       });
     });
 
-    document.querySelector("#reservation-form").addEventListener("submit", (event) => {
+    const garageConfig = window.GARAGE_ENV || {};
+    const reservationEmail = garageConfig.reservationEmail || "contact@legaragerestaurant.ma";
+    const reservationForm = document.querySelector("#reservation-form");
+    const toast = document.querySelector("#toast");
+
+    reservationForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      document.querySelector("#toast").classList.add("is-visible");
+      const formData = new FormData(reservationForm);
+      const reservationDetails = [
+        "Bonjour,",
+        "",
+        "Je souhaite reserver une table au Garage Restaurant.",
+        "",
+        `Nom: ${formData.get("name") || ""}`,
+        `Telephone: ${formData.get("phone") || ""}`,
+        `Email: ${formData.get("email") || ""}`,
+        `Nombre de personnes: ${formData.get("guests") || ""}`,
+        `Date souhaitee: ${formData.get("date") || ""}`,
+        `Creneau: ${formData.get("slot") || ""}`,
+        `Message: ${formData.get("message") || ""}`,
+        "",
+        "Merci de me confirmer la disponibilite."
+      ].join("\n");
+
+      const subject = encodeURIComponent("Demande de reservation - Le Garage Restaurant");
+      const body = encodeURIComponent(reservationDetails);
+      window.location.href = `mailto:${reservationEmail}?subject=${subject}&body=${body}`;
+      toast.classList.add("is-visible");
     });
   </script>
 </body>

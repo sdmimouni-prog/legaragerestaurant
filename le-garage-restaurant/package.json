@@ -1,0 +1,19 @@
+{
+  "name": "le-garage-restaurant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site statique Le Garage Restaurant avec environnement local et production Vercel.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "sh scripts/run.sh dev",
+    "build": "sh scripts/run.sh build",
+    "preview": "sh scripts/run.sh preview",
+    "check": "sh scripts/run.sh check",
+    "prod:env": "npx vercel env ls",
+    "prod:preview": "sh scripts/run.sh check && npx vercel",
+    "prod:deploy": "sh scripts/run.sh check && npx vercel --prod"
+  }
+}
