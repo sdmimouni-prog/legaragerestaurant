@@ -291,9 +291,9 @@
       overflow: hidden;
       border-bottom: 1px solid var(--line);
       background:
-        linear-gradient(90deg, rgba(8, 8, 6, .96) 0%, rgba(8, 8, 6, .78) 44%, rgba(8, 8, 6, .34) 100%),
-        linear-gradient(0deg, #080806 0%, rgba(8, 8, 6, .24) 42%),
-        url("assets/bar-cocktail.png") center / cover no-repeat;
+        linear-gradient(90deg, rgba(8, 8, 6, .9) 0%, rgba(8, 8, 6, .48) 44%, rgba(8, 8, 6, .12) 100%),
+        linear-gradient(0deg, rgba(8, 8, 6, .62) 0%, rgba(8, 8, 6, .12) 42%),
+        url("assets/cover-restaurant.png") center / cover no-repeat;
     }
 
     .hero-inner {
@@ -661,6 +661,30 @@
       border-bottom: 1px solid rgba(122, 90, 50, .18);
     }
 
+    .menu-item-media {
+      display: grid;
+      grid-template-columns: 86px minmax(78px, max-content);
+      gap: 18px;
+      align-items: center;
+      justify-content: end;
+    }
+
+    .menu-thumb {
+      width: 86px;
+      aspect-ratio: 1 / 1;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid rgba(122, 90, 50, .26);
+      border-radius: 8px;
+      background: #21170f;
+    }
+
+    .menu-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .menu-item:last-child {
       border-bottom: 0;
     }
@@ -680,7 +704,9 @@
 
     .price {
       color: #21170f;
+      display: block;
       font-weight: 900;
+      text-align: right;
       white-space: nowrap;
     }
 
@@ -711,24 +737,49 @@
       color: rgba(245, 241, 232, .72);
     }
 
-    .gallery-strip {
+    .dish-slider {
+      position: relative;
       margin-top: 38px;
-      display: grid;
-      grid-template-columns: 1fr 1.18fr 1fr;
-      gap: 16px;
+      overflow: hidden;
     }
 
-    .gallery-strip img {
-      width: 100%;
-      height: 360px;
-      object-fit: cover;
+    .dish-track {
+      display: flex;
+      width: max-content;
+      gap: 18px;
+      animation: dishScroll 34s linear infinite;
+    }
+
+    .dish-slider:hover .dish-track {
+      animation-play-state: paused;
+    }
+
+    .dish-slide {
+      margin: 0;
+      width: clamp(260px, 28vw, 390px);
+      aspect-ratio: 1 / 1;
+      flex: 0 0 auto;
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 8px;
+      background: #14100c;
+      box-shadow: 0 22px 52px rgba(0, 0, 0, .3);
     }
 
-    .gallery-strip img:nth-child(2) {
-      height: 430px;
-      margin-top: -34px;
+    .dish-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes dishScroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(calc(-50% - 9px));
+      }
     }
 
     .chef-grid {
@@ -773,43 +824,67 @@
       font-size: .92rem;
     }
 
-    .moments-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .offers-slider {
+      margin-top: 38px;
+      overflow: hidden;
     }
 
-    .moment-card {
+    .offers-track {
+      width: max-content;
+      display: flex;
+      gap: 18px;
+      animation: offersScroll 46s linear infinite;
+    }
+
+    .offers-slider:hover .offers-track {
+      animation-play-state: paused;
+    }
+
+    .offer-card {
+      width: clamp(280px, 30vw, 390px);
+      flex: 0 0 auto;
       overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
       background: rgba(245, 241, 232, .055);
     }
 
-    .moment-card img {
+    .offer-card img {
       width: 100%;
-      height: 310px;
+      aspect-ratio: 4 / 5;
       object-fit: cover;
     }
 
-    .moment-content {
+    .offer-content {
       padding: 24px;
     }
 
-    .moment-content span {
+    .offer-content span {
       color: var(--copper-bright);
       font-size: .76rem;
       font-weight: 800;
       text-transform: uppercase;
     }
 
-    .moment-content h3 {
+    .offer-content h3 {
       margin-top: 10px;
       font-size: 1.55rem;
     }
 
-    .moment-content p {
+    .offer-content p {
       margin: 12px 0 0;
       color: rgba(245, 241, 232, .68);
       font-size: .9rem;
+    }
+
+    @keyframes offersScroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(calc(-50% - 9px));
+      }
     }
 
     .reservation {
@@ -929,6 +1004,52 @@
       margin-top: 4px;
       color: var(--ivory);
       line-height: 1.35;
+    }
+
+    .map-card {
+      position: relative;
+      min-height: 148px;
+      margin-top: 20px;
+      display: grid;
+      align-content: end;
+      padding: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(216, 146, 85, .16), rgba(245, 241, 232, .04)),
+        linear-gradient(90deg, rgba(245, 241, 232, .08) 1px, transparent 1px) 0 0 / 36px 36px,
+        linear-gradient(rgba(245, 241, 232, .06) 1px, transparent 1px) 0 0 / 36px 36px,
+        #100c09;
+    }
+
+    .map-card::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 34px;
+      width: 20px;
+      height: 20px;
+      border: 4px solid var(--copper-bright);
+      border-radius: 50% 50% 50% 0;
+      transform: translateX(-50%) rotate(-45deg);
+      box-shadow: 0 0 0 10px rgba(216, 146, 85, .12);
+    }
+
+    .map-card strong {
+      position: relative;
+      display: block;
+      color: var(--ivory);
+      font-family: var(--serif);
+      font-size: 1.12rem;
+    }
+
+    .map-card span {
+      position: relative;
+      margin-top: 4px;
+      color: rgba(245, 241, 232, .68);
+      font-size: .82rem;
+      font-weight: 700;
     }
 
     .toast {
@@ -1121,7 +1242,6 @@
       .stats-grid,
       .pillars,
       .chef-grid,
-      .moments-grid,
       .reservation-form {
         grid-template-columns: 1fr;
       }
@@ -1136,6 +1256,16 @@
         padding: 22px 20px;
       }
 
+      .menu-item-media {
+        grid-template-columns: 76px minmax(72px, max-content);
+        justify-content: start;
+        gap: 16px;
+      }
+
+      .menu-thumb {
+        width: 76px;
+      }
+
       .menu-category {
         padding: 20px;
       }
@@ -1144,14 +1274,13 @@
         padding: 42px 20px 54px;
       }
 
-      .gallery-strip {
-        grid-template-columns: 1fr;
+      .dish-track {
+        gap: 12px;
+        animation-duration: 28s;
       }
 
-      .gallery-strip img,
-      .gallery-strip img:nth-child(2) {
-        height: 320px;
-        margin-top: 0;
+      .dish-slide {
+        width: min(78vw, 320px);
       }
 
       .reservation-form {
@@ -1284,58 +1413,14 @@
           <span class="eyebrow">Concept</span>
           <div class="section-heading">
             <h2>Une table, un atelier, un lieu de rencontres.</h2>
-            <p>Le Garage est l'extension naturelle du Musée: design industriel, culture automobile, hospitalité marocaine et cuisine de saison se rejoignent dans une expérience pensée pour les visiteurs, les passionnés et les événements.</p>
+            <p>Le Garage est l'extension naturelle du Musée d'automobile: design industriel, culture automobile, hospitalité marocaine et cuisine de saison se rejoignent dans une expérience pensée pour les visiteurs, les passionnés et les événements.</p>
           </div>
           <p class="body-copy">Le lieu reprend les codes du brand book: noir profond, cuivre, bronze, ivoire chaud, olive vintage, cuir, métal brossé et lumière douce. Chaque détail travaille la même idée: transformer la visite en moment gastronomique mémorable.</p>
-          <div class="stats-grid" aria-label="Indicateurs">
-            <div class="stat-card"><strong>2</strong><span>services par jour</span></div>
-            <div class="stat-card"><strong>Open</strong><span>cuisine visible</span></div>
-            <div class="stat-card"><strong>Privé</strong><span>formats sur mesure</span></div>
-          </div>
         </div>
         <figure class="image-frame tall">
-          <img src="assets/garage-restaurant.jpg" alt="Terrasse du restaurant Le Garage au Musée de l'Automobile">
+          <img src="assets/concept-garden.png" alt="Terrasse jardin du restaurant Le Garage au Musée de l'Automobile">
           <figcaption class="image-caption">Restaurant du Musée de l'Automobile du Maroc · Casablanca</figcaption>
         </figure>
-      </div>
-    </section>
-
-    <section class="section alt" aria-labelledby="valeurs-title">
-      <div class="section-inner">
-        <div class="section-heading center">
-          <span class="eyebrow">ADN</span>
-          <h2 id="valeurs-title">Les codes du Garage.</h2>
-        </div>
-        <div class="pillars">
-          <article class="pillar-card">
-            <span>01</span>
-            <div>
-              <h3>Précision</h3>
-              <p>Une cuisine maîtrisée jusque dans le moindre détail.</p>
-            </div>
-          </article>
-          <article class="pillar-card">
-            <span>02</span>
-            <div>
-              <h3>Héritage</h3>
-              <p>Un lieu inspiré par l'histoire automobile et les belles mécaniques.</p>
-            </div>
-          </article>
-          <article class="pillar-card">
-            <span>03</span>
-            <div>
-              <h3>Élégance</h3>
-              <p>Une atmosphère chaleureuse, sophistiquée et intemporelle.</p>
-            </div>
-          </article>
-          <article class="pillar-card">
-            <span>04</span>
-            <div>
-              <h3>Passion</h3>
-              <p>Une expérience pensée pour les amateurs de gastronomie et d'émotions.</p>
-            </div>
-          </article>
-        </div>
       </div>
     </section>
 
@@ -1363,28 +1448,48 @@
                 <strong>Tartare mangue, avocat & crevettes</strong>
                 <p>Vinaigrette aigre-douce, fraîcheur fruitée et finale iodée.</p>
               </div>
-              <span class="price">105 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-entree-tartare-crevettes.png" alt="Tartare mangue, avocat et crevettes">
+                </figure>
+                <span class="price">105 DH</span>
+              </div>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Salade César au poulet mariné</strong>
                 <p>Parmesan, chips d'ail et assaisonnement maison.</p>
               </div>
-              <span class="price">90 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-entree-salade-cesar.png" alt="Salade César au poulet mariné">
+                </figure>
+                <span class="price">90 DH</span>
+              </div>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Grand carpaccio de bœuf</strong>
                 <p>Parmesan, câpres frits et noisettes grillées.</p>
               </div>
-              <span class="price">135 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-entree-carpaccio-boeuf.png" alt="Grand carpaccio de bœuf">
+                </figure>
+                <span class="price">135 DH</span>
+              </div>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Carpaccio de loup aux agrumes</strong>
                 <p>Gingembre, tomates séchées et marinade vive.</p>
               </div>
-              <span class="price">125 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-entree-carpaccio-loup.png" alt="Carpaccio de loup aux agrumes">
+                </figure>
+                <span class="price">125 DH</span>
+              </div>
             </article>
           </section>
 
@@ -1462,7 +1567,7 @@
     </section>
 
     <section class="kitchen-band" id="cuisine" aria-labelledby="cuisine-title">
-      <img src="assets/cuisine-ouverte.jpg" alt="Cuisine ouverte du Garage avec la brigade en service">
+      <img src="assets/photo-cuisine-team.png" alt="Brigade du Garage Restaurant en cuisine ouverte">
       <div class="kitchen-copy">
         <span class="eyebrow">L'atelier culinaire</span>
         <h2 id="cuisine-title">La cuisine devient spectacle, sans artifice.</h2>
@@ -1481,10 +1586,39 @@
           <h2 id="gallery-title">Matières, gestes, lumière.</h2>
           <p>Une scénographie sensorielle: cuir, cuivre, métal, bois foncé, verre fumé et énergie du service.</p>
         </div>
-        <div class="gallery-strip">
-          <img src="assets/cuisine-bar.png" alt="Comptoir lumineux du restaurant">
-          <img src="assets/cuisine-chef-2.jpg" alt="Chef en cuisine ouverte">
-          <img src="assets/table-ramadan.png" alt="Table dressée avec soupe et mets marocains">
+        <div class="dish-slider" aria-label="Photos de plats du restaurant">
+          <div class="dish-track">
+            <figure class="dish-slide">
+              <img src="assets/dish-slide-1.png" alt="Carpaccio dressé sur assiette noire">
+            </figure>
+            <figure class="dish-slide">
+              <img src="assets/dish-slide-2.png" alt="Dessert crème et bouchées chocolatées">
+            </figure>
+            <figure class="dish-slide">
+              <img src="assets/dish-slide-3.png" alt="Plat de poisson et fruits de mer en casserole">
+            </figure>
+            <figure class="dish-slide">
+              <img src="assets/dish-slide-4.png" alt="Plat signature dressé avec courgettes">
+            </figure>
+            <figure class="dish-slide">
+              <img src="assets/dish-slide-5.png" alt="Viande grillée accompagnée de gratin">
+            </figure>
+            <figure class="dish-slide" aria-hidden="true">
+              <img src="assets/dish-slide-1.png" alt="">
+            </figure>
+            <figure class="dish-slide" aria-hidden="true">
+              <img src="assets/dish-slide-2.png" alt="">
+            </figure>
+            <figure class="dish-slide" aria-hidden="true">
+              <img src="assets/dish-slide-3.png" alt="">
+            </figure>
+            <figure class="dish-slide" aria-hidden="true">
+              <img src="assets/dish-slide-4.png" alt="">
+            </figure>
+            <figure class="dish-slide" aria-hidden="true">
+              <img src="assets/dish-slide-5.png" alt="">
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -1499,7 +1633,7 @@
 
         <div class="chef-grid">
           <article class="chef-card">
-            <img src="assets/stephane-gaborieau.jpg" alt="Stéphane Gaborieau">
+            <img src="assets/chef-stephane-gaborieau.png" alt="Stéphane Gaborieau">
             <div class="chef-content">
               <span>Maître de mise en œuvre</span>
               <h3>Stéphane Gaborieau</h3>
@@ -1508,7 +1642,7 @@
           </article>
 
           <article class="chef-card">
-            <img src="assets/bernard-bremond.jpg" alt="Bernard Brémond">
+            <img src="assets/chef-bernard-bremond.png" alt="Bernard Brémond">
             <div class="chef-content">
               <span>Chef exécutif</span>
               <h3>Bernard Brémond</h3>
@@ -1522,36 +1656,94 @@
     <section class="section" id="temps-forts">
       <div class="section-inner">
         <div class="section-heading">
-          <span class="eyebrow">Temps forts</span>
-          <h2>Les moments qui font vivre la table.</h2>
-          <p>Actualités culinaires, rendez-vous saisonniers, cocktails, cuisine en scène et formats privés en lien avec le Musée.</p>
+          <span class="eyebrow">Forfaits</span>
+          <h2>Les expériences à réserver au Garage.</h2>
+          <p>Matchs, fan zone, cars & coffee, sunset garden et cinéma sous les étoiles: des formats pensés pour vivre le Musée autrement.</p>
         </div>
 
-        <div class="moments-grid">
-          <article class="moment-card">
-            <img src="assets/table-ramadan.png" alt="Ftour signature au restaurant Le Garage">
-            <div class="moment-content">
-              <span>Ramadan</span>
-              <h3>Ftour signature</h3>
-              <p>Dattes, soupes servies à table, classiques marocains, plats signature et accès au musée.</p>
-            </div>
-          </article>
-          <article class="moment-card">
-            <img src="assets/bar-cocktail.png" alt="Bar inspiré par l'univers automobile">
-            <div class="moment-content">
-              <span>Cocktail</span>
-              <h3>Bar mécanique</h3>
-              <p>Métal patiné, précision du geste et assemblages audacieux pour des soirées de marque.</p>
-            </div>
-          </article>
-          <article class="moment-card">
-            <img src="assets/garage-restaurant.jpg" alt="Extérieur du Musée et du restaurant">
-            <div class="moment-content">
-              <span>Privé</span>
-              <h3>Événements sur mesure</h3>
-              <p>Cocktail, dîner membres, déjeuner d'affaires ou privatisation complète avec parcours musée.</p>
-            </div>
-          </article>
+        <div class="offers-slider" aria-label="Forfaits et expériences du Garage">
+          <div class="offers-track">
+            <article class="offer-card">
+              <img src="assets/offer-match-opening.png" alt="Forfait premier match Maroc Brésil au Garage Restaurant">
+              <div class="offer-content">
+                <span>Match d'ouverture</span>
+                <h3>Le premier match se vit ensemble.</h3>
+                <p>Dîner à la carte, animation live, salle premium décorée et match offert pour les clients du restaurant.</p>
+              </div>
+            </article>
+            <article class="offer-card">
+              <img src="assets/offer-fan-zone.jpeg" alt="Forfait fan zone privée Coupe du Monde au Garage Restaurant">
+              <div class="offer-content">
+                <span>Privatisation</span>
+                <h3>Fan Zone privée.</h3>
+                <p>Écran géant LED, restauration par Le Garage, accès musée en option, animation personnalisée et branding entreprise.</p>
+              </div>
+            </article>
+            <article class="offer-card">
+              <img src="assets/offer-cars-coffee.jpeg" alt="Forfait Cars and Coffee au Garage Restaurant">
+              <div class="offer-content">
+                <span>Rendez-vous mensuel</span>
+                <h3>Cars & Coffee.</h3>
+                <p>Accueil café, exposition automobile, visite guidée du musée, terrasse jardin et brunch optionnel au Garage.</p>
+              </div>
+            </article>
+            <article class="offer-card">
+              <img src="assets/offer-sunset-garden.jpeg" alt="Forfait Sunset Garden au Garage Restaurant">
+              <div class="offer-content">
+                <span>Tous les vendredis</span>
+                <h3>Sunset Garden.</h3>
+                <p>Cocktails signature, live saxophone, terrasse jardin et ambiance musicale de 18h00 à 23h00.</p>
+              </div>
+            </article>
+            <article class="offer-card">
+              <img src="assets/offer-cinema-stars.jpeg" alt="Forfait Cinéma sous les étoiles au Garage Restaurant">
+              <div class="offer-content">
+                <span>Vendredis & samedis</span>
+                <h3>Cinéma sous les étoiles.</h3>
+                <p>Grand écran LED, pop corn, food trucks gourmands, espace lounge confortable et ambiance conviviale.</p>
+              </div>
+            </article>
+            <article class="offer-card" aria-hidden="true">
+              <img src="assets/offer-match-opening.png" alt="">
+              <div class="offer-content">
+                <span>Match d'ouverture</span>
+                <h3>Le premier match se vit ensemble.</h3>
+                <p>Dîner à la carte, animation live, salle premium décorée et match offert pour les clients du restaurant.</p>
+              </div>
+            </article>
+            <article class="offer-card" aria-hidden="true">
+              <img src="assets/offer-fan-zone.jpeg" alt="">
+              <div class="offer-content">
+                <span>Privatisation</span>
+                <h3>Fan Zone privée.</h3>
+                <p>Écran géant LED, restauration par Le Garage, accès musée en option, animation personnalisée et branding entreprise.</p>
+              </div>
+            </article>
+            <article class="offer-card" aria-hidden="true">
+              <img src="assets/offer-cars-coffee.jpeg" alt="">
+              <div class="offer-content">
+                <span>Rendez-vous mensuel</span>
+                <h3>Cars & Coffee.</h3>
+                <p>Accueil café, exposition automobile, visite guidée du musée, terrasse jardin et brunch optionnel au Garage.</p>
+              </div>
+            </article>
+            <article class="offer-card" aria-hidden="true">
+              <img src="assets/offer-sunset-garden.jpeg" alt="">
+              <div class="offer-content">
+                <span>Tous les vendredis</span>
+                <h3>Sunset Garden.</h3>
+                <p>Cocktails signature, live saxophone, terrasse jardin et ambiance musicale de 18h00 à 23h00.</p>
+              </div>
+            </article>
+            <article class="offer-card" aria-hidden="true">
+              <img src="assets/offer-cinema-stars.jpeg" alt="">
+              <div class="offer-content">
+                <span>Vendredis & samedis</span>
+                <h3>Cinéma sous les étoiles.</h3>
+                <p>Grand écran LED, pop corn, food trucks gourmands, espace lounge confortable et ambiance conviviale.</p>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -1617,8 +1809,12 @@
             <li><span>Dîner</span><strong>19h00 à 23h45</strong></li>
             <li><span>Téléphone</span><strong><a href="tel:+212668608754">+212 6 68 60 87 54</a></strong></li>
             <li><span>Email</span><strong><a href="mailto:contact@legaragerestaurant.ma">contact@legaragerestaurant.ma</a></strong></li>
-            <li><span>Adresse</span><strong>Musée de l'Automobile du Maroc, Route de Bouskoura, Casablanca</strong></li>
+            <li><span>Adresse</span><strong><a href="https://www.google.com/maps?vet=10CAAQoqAOahcKEwjYpP-l9_yUAxUAAAAAHQAAAAAQCQ..i&amp;pvq=Cg0vZy8xMXYxNzN6NTAyIhYKEG11c2VlIGF1dG9tb2JpbGUQAhgD&amp;lqi=ChZtdXNlZSBhdXRvbW9iaWxlIG1hcm9jSIKo_PGEuoCACFokEAAQARgBGAIiFm11c2VlIGF1dG9tb2JpbGUgbWFyb2MyAmZykgENbW90b3JpbmdfY2x1YpoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSeU5sbFFkVTlSRUFF-gEECAAQSg&amp;fvr=1&amp;cs=0&amp;um=1&amp;ie=UTF-8&amp;fb=1&amp;gl=ma&amp;sa=X&amp;ftid=0xda62dee5e515325:0x556d3d052eaffcd5" target="_blank" rel="noopener">Musée de l'Automobile du Maroc, Route de Bouskoura, Casablanca</a></strong></li>
           </ul>
+          <a class="map-card" href="https://www.google.com/maps?vet=10CAAQoqAOahcKEwjYpP-l9_yUAxUAAAAAHQAAAAAQCQ..i&amp;pvq=Cg0vZy8xMXYxNzN6NTAyIhYKEG11c2VlIGF1dG9tb2JpbGUQAhgD&amp;lqi=ChZtdXNlZSBhdXRvbW9iaWxlIG1hcm9jSIKo_PGEuoCACFokEAAQARgBGAIiFm11c2VlIGF1dG9tb2JpbGUgbWFyb2MyAmZykgENbW90b3JpbmdfY2x1YpoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSeU5sbFFkVTlSRUFF-gEECAAQSg&amp;fvr=1&amp;cs=0&amp;um=1&amp;ie=UTF-8&amp;fb=1&amp;gl=ma&amp;sa=X&amp;ftid=0xda62dee5e515325:0x556d3d052eaffcd5" target="_blank" rel="noopener" aria-label="Ouvrir l'adresse dans Google Maps">
+            <strong>Voir sur Google Maps</strong>
+            <span>Route de Bouskoura · Casablanca</span>
+          </a>
           <div class="section-actions">
             <a class="btn btn-primary" href="tel:+212668608754">Appeler</a>
             <a class="btn btn-secondary" href="mailto:contact@legaragerestaurant.ma">Écrire</a>
