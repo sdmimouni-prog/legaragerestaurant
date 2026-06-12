@@ -290,13 +290,70 @@
       min-height: 70svh;
       overflow: hidden;
       border-bottom: 1px solid var(--line);
+      background: #080806;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
       background:
         linear-gradient(90deg, rgba(8, 8, 6, .9) 0%, rgba(8, 8, 6, .48) 44%, rgba(8, 8, 6, .12) 100%),
-        linear-gradient(0deg, rgba(8, 8, 6, .62) 0%, rgba(8, 8, 6, .12) 42%),
-        url("assets/cover-restaurant.png") center / cover no-repeat;
+        linear-gradient(0deg, rgba(8, 8, 6, .62) 0%, rgba(8, 8, 6, .12) 42%);
+    }
+
+    .hero-slider {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      animation: heroFade 24s ease-in-out infinite;
+    }
+
+    .hero-slide:first-child {
+      opacity: 1;
+    }
+
+    .hero-slide:nth-child(2) {
+      animation-delay: 6s;
+    }
+
+    .hero-slide:nth-child(3) {
+      animation-delay: 12s;
+    }
+
+    .hero-slide:nth-child(4) {
+      animation-delay: 18s;
+    }
+
+    @keyframes heroFade {
+      0%,
+      21% {
+        opacity: 1;
+      }
+
+      25%,
+      96% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
 
     .hero-inner {
+      position: relative;
+      z-index: 2;
       width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
       padding: 82px 0 54px;
@@ -470,14 +527,17 @@
       background: #14100c;
     }
 
-    .image-frame img {
+    .image-frame img,
+    .image-frame video {
+      display: block;
       width: 100%;
       height: 100%;
       min-height: 460px;
       object-fit: cover;
     }
 
-    .image-frame.tall img {
+    .image-frame.tall img,
+    .image-frame.tall video {
       min-height: 620px;
     }
 
@@ -673,16 +733,24 @@
       width: 86px;
       aspect-ratio: 1 / 1;
       margin: 0;
-      overflow: hidden;
-      border: 1px solid rgba(122, 90, 50, .26);
-      border-radius: 8px;
-      background: #21170f;
+      overflow: visible;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
     }
 
     .menu-thumb img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+    }
+
+    .menu-thumb img[src^="assets/menu-plat-"] {
+      transform: scale(1.18);
+    }
+
+    .menu-thumb img[src="assets/menu-entree-tartare-crevettes.png"] {
+      transform: scale(1.18);
     }
 
     .menu-item:last-child {
@@ -746,7 +814,7 @@
     .dish-track {
       display: flex;
       width: max-content;
-      gap: 18px;
+      gap: 28px;
       animation: dishScroll 34s linear infinite;
     }
 
@@ -756,20 +824,23 @@
 
     .dish-slide {
       margin: 0;
-      width: clamp(260px, 28vw, 390px);
-      aspect-ratio: 1 / 1;
+      width: clamp(300px, 34vw, 520px);
+      aspect-ratio: 4 / 3;
       flex: 0 0 auto;
-      overflow: hidden;
-      border: 1px solid var(--line);
+      overflow: visible;
+      border: 0;
       border-radius: 8px;
-      background: #14100c;
-      box-shadow: 0 22px 52px rgba(0, 0, 0, .3);
+      background: transparent;
+      filter:
+        drop-shadow(0 18px 22px rgba(0, 0, 0, .58))
+        drop-shadow(0 2px 6px rgba(245, 241, 232, .16));
     }
 
     .dish-slide img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      border-radius: 8px;
+      object-fit: contain;
     }
 
     @keyframes dishScroll {
@@ -1235,7 +1306,9 @@
       }
 
       .image-frame img,
-      .image-frame.tall img {
+      .image-frame video,
+      .image-frame.tall img,
+      .image-frame.tall video {
         min-height: 380px;
       }
 
@@ -1275,12 +1348,12 @@
       }
 
       .dish-track {
-        gap: 12px;
+        gap: 18px;
         animation-duration: 28s;
       }
 
       .dish-slide {
-        width: min(78vw, 320px);
+        width: min(86vw, 360px);
       }
 
       .reservation-form {
@@ -1371,39 +1444,19 @@
 
   <main id="top">
     <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-slider" aria-hidden="true">
+        <img class="hero-slide" src="assets/hero-slide-restaurant.png" alt="">
+        <img class="hero-slide" src="assets/hero-slide-garden.jpg" alt="">
+        <img class="hero-slide" src="assets/hero-slide-cuisine.png" alt="">
+        <img class="hero-slide" src="assets/hero-slide-cover.png" alt="">
+      </div>
       <div class="hero-inner">
         <div class="hero-copy">
           <span class="eyebrow">Casablanca · Bouskoura</span>
           <h1 id="hero-title">Le Garage Restaurant</h1>
-          <p>L'élégance gastronomique inspirée par l'héritage automobile. Une table de saison, une cuisine ouverte et une atmosphère de club privé au cœur du Musée de l'Automobile du Maroc.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#reservation">Réserver une table</a>
-            <a class="btn btn-secondary" href="#carte">Voir la carte</a>
-            <a class="btn btn-ghost" href="mailto:contact@legaragerestaurant.ma">Privatiser</a>
-          </div>
+          <p>L'élégance gastronomique inspirée par l'héritage automobile. Une table de saison, une cuisine ouverte au cœur du Musée de l'Automobile du Maroc.</p>
         </div>
 
-      </div>
-    </section>
-
-    <section class="quickbar" aria-label="Accès rapide">
-      <div class="quickbar-inner">
-        <a class="quick-item" href="#reservation">
-          <span>Réserver</span>
-          <strong>Demande en ligne</strong>
-        </a>
-        <a class="quick-item" href="#carte">
-          <span>Carte</span>
-          <strong>Entrées · Plats · Desserts</strong>
-        </a>
-        <a class="quick-item" href="#cuisine">
-          <span>Atelier</span>
-          <strong>Cuisine ouverte</strong>
-        </a>
-        <a class="quick-item" href="#infos">
-          <span>Adresse</span>
-          <strong>Route de Bouskoura</strong>
-        </a>
       </div>
     </section>
 
@@ -1415,12 +1468,41 @@
             <h2>Une table, un atelier, un lieu de rencontres.</h2>
             <p>Le Garage est l'extension naturelle du Musée d'automobile: design industriel, culture automobile, hospitalité marocaine et cuisine de saison se rejoignent dans une expérience pensée pour les visiteurs, les passionnés et les événements.</p>
           </div>
-          <p class="body-copy">Le lieu reprend les codes du brand book: noir profond, cuivre, bronze, ivoire chaud, olive vintage, cuir, métal brossé et lumière douce. Chaque détail travaille la même idée: transformer la visite en moment gastronomique mémorable.</p>
         </div>
         <figure class="image-frame tall">
-          <img src="assets/concept-garden.png" alt="Terrasse jardin du restaurant Le Garage au Musée de l'Automobile">
+          <video src="assets/concept-video.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Terrasse jardin du restaurant Le Garage au Musée de l'Automobile"></video>
           <figcaption class="image-caption">Restaurant du Musée de l'Automobile du Maroc · Casablanca</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <section class="section alt" id="chefs">
+      <div class="section-inner">
+        <div class="section-heading">
+          <span class="eyebrow">Les chefs</span>
+          <h2>Une signature portée par l'exigence et la transmission.</h2>
+          <p>La vision culinaire du Garage repose sur la précision, la constance et la formation des talents.</p>
+        </div>
+
+        <div class="chef-grid">
+          <article class="chef-card">
+            <img src="assets/chef-stephane-gaborieau.png" alt="Stéphane Gaborieau">
+            <div class="chef-content">
+              <span>Maître de mise en œuvre</span>
+              <h3>Stéphane Gaborieau</h3>
+              <p>Étoilé et Meilleur Ouvrier de France, il accompagne le projet pour structurer l'identité culinaire et transmettre une culture d'excellence durable.</p>
+            </div>
+          </article>
+
+          <article class="chef-card">
+            <img src="assets/chef-bernard-bremond.png" alt="Bernard Brémond">
+            <div class="chef-content">
+              <span>Chef exécutif</span>
+              <h3>Bernard Brémond</h3>
+              <p>Chef passionné et artisan du goût, Bernard Brémond transforme chaque service en une expérience d'exception. Son exigence quotidienne, sa maîtrise technique et son sens du détail garantissent une cuisine précise, généreuse et constamment irréprochable.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1441,7 +1523,6 @@
           <section class="menu-section is-active" id="entrees" role="tabpanel" aria-labelledby="tab-entrees">
             <div class="menu-category">
               <h3>Entrées</h3>
-              <span>90 - 135 DH</span>
             </div>
             <article class="menu-item">
               <div>
@@ -1452,7 +1533,6 @@
                 <figure class="menu-thumb">
                   <img src="assets/menu-entree-tartare-crevettes.png" alt="Tartare mangue, avocat et crevettes">
                 </figure>
-                <span class="price">105 DH</span>
               </div>
             </article>
             <article class="menu-item">
@@ -1464,7 +1544,6 @@
                 <figure class="menu-thumb">
                   <img src="assets/menu-entree-salade-cesar.png" alt="Salade César au poulet mariné">
                 </figure>
-                <span class="price">90 DH</span>
               </div>
             </article>
             <article class="menu-item">
@@ -1476,7 +1555,6 @@
                 <figure class="menu-thumb">
                   <img src="assets/menu-entree-carpaccio-boeuf.png" alt="Grand carpaccio de bœuf">
                 </figure>
-                <span class="price">135 DH</span>
               </div>
             </article>
             <article class="menu-item">
@@ -1488,7 +1566,6 @@
                 <figure class="menu-thumb">
                   <img src="assets/menu-entree-carpaccio-loup.png" alt="Carpaccio de loup aux agrumes">
                 </figure>
-                <span class="price">125 DH</span>
               </div>
             </article>
           </section>
@@ -1496,70 +1573,80 @@
           <section class="menu-section" id="plats" role="tabpanel" aria-labelledby="tab-plats">
             <div class="menu-category">
               <h3>Plats</h3>
-              <span>165 - 235 DH</span>
             </div>
             <article class="menu-item">
               <div>
                 <strong>Filet de dorade à la plancha</strong>
                 <p>Écrasée de pomme de terre aux algues et jus de bisque.</p>
               </div>
-              <span class="price">195 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-plat-filet-dorade.png" alt="Filet de dorade à la plancha">
+                </figure>
+              </div>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Entrecôte de bœuf grillée 300 g</strong>
                 <p>Gratin de macaronis au cheddar.</p>
               </div>
-              <span class="price">215 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-plat-entrecote-boeuf.png" alt="Entrecôte de bœuf grillée 300 g">
+                </figure>
+              </div>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Épaule d'agneau confite</strong>
                 <p>Tian de légumes, pommes croustillantes et crème d'ail.</p>
               </div>
-              <span class="price">235 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-plat-epaule-agneau.png" alt="Épaule d'agneau confite">
+                </figure>
+              </div>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Ribs de bœuf façon Tangia</strong>
                 <p>Purée de carottes au cumin et jus généreux.</p>
               </div>
-              <span class="price">165 DH</span>
+              <div class="menu-item-media">
+                <figure class="menu-thumb">
+                  <img src="assets/menu-plat-ribs-tangia.png" alt="Ribs de bœuf façon Tangia">
+                </figure>
+              </div>
             </article>
           </section>
 
           <section class="menu-section" id="desserts" role="tabpanel" aria-labelledby="tab-desserts">
             <div class="menu-category">
               <h3>Desserts</h3>
-              <span>70 - 75 DH</span>
             </div>
             <article class="menu-item">
               <div>
                 <strong>Pavlova fruits rouges</strong>
                 <p>Crème légère au chocolat blanc.</p>
               </div>
-              <span class="price">75 DH</span>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Cheesecake Dubaï style</strong>
                 <p>Texture fondante et jeu de croustillants.</p>
               </div>
-              <span class="price">75 DH</span>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Millefeuille noisette</strong>
                 <p>Feuilletage, crème et notes torréfiées.</p>
               </div>
-              <span class="price">75 DH</span>
             </article>
             <article class="menu-item">
               <div>
                 <strong>Salade de fruits frais</strong>
                 <p>Simple, nette, de saison.</p>
               </div>
-              <span class="price">70 DH</span>
             </article>
           </section>
         </div>
@@ -1619,36 +1706,6 @@
               <img src="assets/dish-slide-5.png" alt="">
             </figure>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" id="chefs">
-      <div class="section-inner">
-        <div class="section-heading">
-          <span class="eyebrow">Les chefs</span>
-          <h2>Une signature portée par l'exigence et la transmission.</h2>
-          <p>La vision culinaire du Garage repose sur la précision, la constance et la formation des talents.</p>
-        </div>
-
-        <div class="chef-grid">
-          <article class="chef-card">
-            <img src="assets/chef-stephane-gaborieau.png" alt="Stéphane Gaborieau">
-            <div class="chef-content">
-              <span>Maître de mise en œuvre</span>
-              <h3>Stéphane Gaborieau</h3>
-              <p>Double étoilé Michelin et Meilleur Ouvrier de France, il accompagne le projet pour structurer l'identité culinaire et transmettre une culture d'excellence durable.</p>
-            </div>
-          </article>
-
-          <article class="chef-card">
-            <img src="assets/chef-bernard-bremond.png" alt="Bernard Brémond">
-            <div class="chef-content">
-              <span>Chef exécutif</span>
-              <h3>Bernard Brémond</h3>
-              <p>Il transforme l'exigence en réalité opérationnelle: encadrer les équipes, garantir la constance et veiller à la précision de chaque service.</p>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -1820,6 +1877,27 @@
             <a class="btn btn-secondary" href="mailto:contact@legaragerestaurant.ma">Écrire</a>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <section class="quickbar" aria-label="Accès rapide">
+      <div class="quickbar-inner">
+        <a class="quick-item" href="#reservation">
+          <span>Réserver</span>
+          <strong>Demande en ligne</strong>
+        </a>
+        <a class="quick-item" href="#carte">
+          <span>Carte</span>
+          <strong>Entrées · Plats · Desserts</strong>
+        </a>
+        <a class="quick-item" href="#cuisine">
+          <span>Atelier</span>
+          <strong>Cuisine ouverte</strong>
+        </a>
+        <a class="quick-item" href="#infos">
+          <span>Adresse</span>
+          <strong>Route de Bouskoura</strong>
+        </a>
       </div>
     </section>
   </main>
